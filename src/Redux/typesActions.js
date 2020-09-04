@@ -1,0 +1,8 @@
+export const SET_CURRENT_ZOOM = "SET_CURRENT_ZOOM";
+export const HANDLE_PLACE_MARK = "HANDLE_PLACE_MARK";
+export const USER_SELECT_MARK = "USER_SELECT_MARK";
+export const OFF_PLACE_USER_MARK = "OFF_PLACE_USER_MARK";
+export const SET_LIST_LATLNG = "SET_LIST_LATLNG";
+export const FIND_SELECT_OBJECT = "FIND_SELECT_OBJECT";
+export const ADD_NEW_DATA_OF_OBJECT = "ADD_NEW_DATA_OF_OBJECT"; // в state-легко!, а как в localStorage?
+export const ON_CLICK_CLOSE_BUTTON = "ON_CLICK_CLOSE_BUTTON";

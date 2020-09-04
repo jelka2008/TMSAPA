@@ -1,0 +1,78 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+html,
+body,
+#root,
+.App,
+#mapId {
+  height: 100%;
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
+}
+
+.App {
+  position: relative;
+}
+
+#mapId {
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  z-index: 0;
+}
+
+#placeRandomMarkerButton {
+  position: absolute;
+  right: 25px;
+  top: 25px;
+  z-index: 1000000;
+  font-size: 1.5em;
+}
+
+ul {
+  padding: 5px 10px 5px 25px;
+  background-color: #ededed;
+}
+
+li {
+  margin: 10px 0px;
+}
+
+code {
+  background-color: #ededed;
+  font-weight: bold;
+}
+
+.window-wrapper {
+  height: 100vh;
+  width: 100vw;
+  display: grid;
+  grid-template-rows: 1fr 16fr;
+}
+
+.content-block {
+  height: 100%;
+  overflow: auto;
+
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  grid-template-rows: 4fr 1fr;
+  grid-template-areas:
+    "address-box leaflet-container hand_actions"
+    "address-box leaflet-container hand_actions";
+}
+
+@media (max-width: 1199.9px) {
+  .content-block {
+
+    grid-template-areas:
+      "address-box leaflet-container leaflet-container"
+      "hand_actions hand_actions hand_actions";
+  }
+}

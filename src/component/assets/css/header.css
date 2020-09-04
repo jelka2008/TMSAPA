@@ -1,0 +1,27 @@
+.header_block {
+  flex: 1 1 1;
+  width: 100vw;
+  /* height: 50px; */
+  text-align: center;
+  background-color: darkcyan;
+}
+
+.header_block .navbar-collapse {
+  z-index: 1;
+}
+
+.header_wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header_wrapper #login {
+  color: rgb(71, 67, 67) !important;
+  margin-right: 2em;
+}
+
+.header_wrapper #login:hover {
+  color: rgba(0, 0, 0, 0.9) !important;
+  text-decoration: none !important;
+}
