@@ -6,6 +6,7 @@ import {
   HANDLE_PLACE_MARK,
   USER_SELECT_MARK,
   OFF_PLACE_USER_MARK,
+  ON_ACTIVE_EDIT_DATA,
   FIND_SELECT_OBJECT,
   ADD_NEW_DATA_OF_OBJECT,
   ON_CLICK_CLOSE_BUTTON,
@@ -20,6 +21,7 @@ let initialState = {
   listObjects: [],
   selectObject: {},
   showDataSelectObject: false,
+  activeEditData: false,
 };
 
 const mapReducer = (state = initialState, action) => {
@@ -70,6 +72,12 @@ const mapReducer = (state = initialState, action) => {
         selectObject: {},
       };
     }
+    case ON_ACTIVE_EDIT_DATA: {
+      return {
+        ...state,
+        activeEditData: true,
+      };
+    }
 
     case FIND_SELECT_OBJECT: {
       const selectObject = state.listObjects.find(
@@ -82,6 +90,7 @@ const mapReducer = (state = initialState, action) => {
         ...state,
         selectObject,
         showDataSelectObject: true,
+        activeEditData: false,
       };
     }
     case ADD_NEW_DATA_OF_OBJECT: {
@@ -90,7 +99,7 @@ const mapReducer = (state = initialState, action) => {
           item.name = action.newData.name;
           item.address.city = action.newData.address;
           item.comments = action.newData.comments;
-          item.linkSourse = action.newData.linkSourse;
+          item.linkSource = action.newData.linkSource;
           // item.tags = [...action.newData.tags];
           return item;
         }
@@ -99,6 +108,7 @@ const mapReducer = (state = initialState, action) => {
       return {
         ...state,
         listObjects: [...listObjectsWithNewData],
+        activeEditData: false,
       };
     }
     default:

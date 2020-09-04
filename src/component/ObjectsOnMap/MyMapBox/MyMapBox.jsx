@@ -47,7 +47,7 @@ class MyMapBox extends React.Component {
         shadowUrl: null,
         shadowSize: null,
         shadowAnchor: null,
-        iconSize: new L.Point(30, 55),
+        iconSize: new L.Point(30, 35),
       });
       return (
         <Marker

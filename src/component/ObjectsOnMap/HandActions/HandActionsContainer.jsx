@@ -2,8 +2,9 @@ import React from "react";
 import {
   userSelectMark,
   offPlaceUserMark,
-  addNewDataOfObject,
+  addNewDataObject,
   onClickCloseButton,
+  onActiveEditData,
 } from "../../../Redux/actions";
 import { connect } from "react-redux";
 import HandActions from "./HandActions";
@@ -13,6 +14,7 @@ let mapStateToProps = (state) => {
     selectObject: state.mapView.selectObject,
     iconUserMarker: state.mapView.iconUserMarker,
     showDataSelectObject: state.mapView.showDataSelectObject,
+    activeEditData: state.mapView.activeEditData,
   };
 };
 
@@ -21,22 +23,31 @@ class HandActionsContainer extends React.Component {
     super(props);
 
     this.state = {
-      dataObject: this.props.selectObject,
+      dataSelectObject: this.props.selectObject,
       // name: "this.props.selectObject.name",
       // address: "this.props.selectObject.address",
       // comments: "this.props.selectObject.comments",
-      // linkSourse: "this.props.selectObject.linkSourse",
+      // linkSource: "this.props.selectObject.linkSource",
       // },
-      activeEditData: false,
+      // activeEditData: false,
     };
   }
   componentDidUpdate() {
-    // console.log(this.state);
+    console.log(this.state);
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.selectObject !== this.props.selectObject) {
-      this.state.dataObject = { ...nextProps.selectObject };
+    if (
+      nextProps.showDataSelectObject &&
+      nextProps.selectObject !== this.props.selectObject
+    ) {
+      this.state.dataSelectObject = {
+        id: nextProps.selectObject.id,
+        name: nextProps.selectObject.name,
+        address: nextProps.selectObject.address.city,
+        comments: nextProps.selectObject.comments,
+        linkSource: nextProps.selectObject.linkSource,
+      };
     }
   }
 
@@ -53,40 +64,37 @@ class HandActionsContainer extends React.Component {
     event.persist();
     this.setState((prev) => ({
       ...prev,
-      dataObject: {
-        ...prev.dataObject,
+      dataSelectObject: {
+        ...prev.dataSelectObject,
         [event.target.name]: event.target.value,
       },
     }));
   };
 
   onSaveNewDataObject = () => {
-    this.props.addNewDataOfObject(this.state.dataObject);
+    this.props.addNewDataObject(this.state.dataSelectObject);
     this.setState({ activeEditData: false });
-    console.log(this.state.dataObject);
+    console.log(this.state.dataSelectObject);
   };
 
   onActiveEditData = () => {
-    this.setState({ activeEditData: true });
+    this.props.onActiveEditData();
   };
 
   render() {
-    console.log({
-      fromProps: this.props.selectObject,
-      fromState: this.state.dataObject,
-    });
     return (
       <>
         <HandActions
+          // idSelectObject={this.props.selectObject.id}
           handleSelectMark={this.handleSelectMark}
           iconUserMarker={this.props.iconUserMarker}
-          selectObject={this.state.dataObject}
+          dataSelectObject={this.state.dataSelectObject}
           showDataSelectObject={this.props.showDataSelectObject}
           changeInputHandler={this.changeInputHandler}
           onSaveData={this.onSaveNewDataObject}
           onClickCloseButton={this.props.onClickCloseButton}
           onActiveEditData={this.onActiveEditData}
-          activeEditData={this.state.activeEditData}
+          activeEditData={this.props.activeEditData}
         />
       </>
     );
@@ -96,6 +104,7 @@ class HandActionsContainer extends React.Component {
 export default connect(mapStateToProps, {
   userSelectMark,
   offPlaceUserMark,
-  addNewDataOfObject,
+  addNewDataObject,
   onClickCloseButton,
+  onActiveEditData,
 })(HandActionsContainer);

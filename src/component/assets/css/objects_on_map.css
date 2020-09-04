@@ -9,7 +9,6 @@
   position: relative;
   grid-area: hand_actions;
   background-color: bisque;
-  padding: 0.5em 1em 0.25em 1em;
 }
 
 .leaflet-container {
@@ -18,22 +17,37 @@
   background-color: thistle;
 }
 
-.show-map-type-objects {
+.show_map_type_objects {
   font-size: 12px;
-  padding-right: 1em;
+  /* padding-right: 1em; */
   position: absolute;
-  bottom: 0;
+  bottom: 0px;
+  background-color: skyblue;
+  width: 100%;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.52);
 }
 
-.show-map-type-objects input {
+.show_map_type_objects input {
   margin-right: 0.5em;
 }
 
-.show-map-type-objects p {
-  margin-bottom: 0.5em !important;
+.show_map_type_objects h6,
+.select-image-block h6,
+.about_select_object h6 {
+  font-weight: bold;
 }
 
-.tagTypeObject {
+.show_map_type_objects-list {
+  border-radius: 3px;
+  margin-top: 0.5em;
+  padding: 0.75em;
+  height: 150px;
+  overflow-y: auto;
+  background-color: bisque;
+  box-shadow: inset -5px 0px 8px rgba(0, 0, 0, 0.52);
+}
+
+.tag_type_object {
   font-size: 11px;
   cursor: pointer;
   line-height: 9px;
@@ -41,19 +55,35 @@
   display: inline-block;
 }
 
-.tagTypeObject:hover {
+.tag_type_object:hover {
   text-decoration: underline;
   color: navy;
 }
 
-.aboutSelectObject {
+.item_hand_actions {
+  padding: 1rem 0.5rem 1rem 1rem;
+  border-radius: 3px;
+}
+
+.about_select_object {
   position: relative;
+  background-color: sandybrown;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.52);
+}
+
+.about_select_object button {
+  border-radius: 5px;
+  margin-right: 1em;
+}
+
+.buttons_block {
+  margin-top: 1em;
 }
 
 .close-button {
   position: absolute;
-  right: 5px;
-  top: 5px;
+  right: 15px;
+  top: 10px;
   width: 15px;
   height: 15px;
   opacity: 1;
@@ -80,36 +110,34 @@
 
 @media (max-width: 1199.9px) {
   .hand_actions {
-    display: grid;
-    grid-template-columns: 1fr 3fr;
-  }
-
-  .show-map-type-objects {
-    margin-left: 1em;
-    display: grid;
-    grid-template-columns: 1fr 5fr;
-  }
-
-  .show-map-type-objects p:nth-child(1) {
-    width: 140px;
-  }
-
-  .show-map-type-objects p:nth-child(2) {
-    max-height: 130px;
     display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    overflow-y: auto;
+  }
+
+  .show_map_type_objects h6,
+  .select-image-block h6,
+  .about_select_object h6 {
+    font-size: 14px;
+  }
+
+  .show_map_type_objects {
+    margin-left: 1em;
+    bottom: unset !important;
+    right: 0;
+    height: inherit !important;
+    width: 300px;
   }
 
   .show-map-type-objects input {
     margin-left: 1em;
   }
 
+  .show_map_type_objects-list {
+    height: 115px !important;
+  }
+
   .select-geoIcon figure {
     padding: 0 0.5em 0 0.5em;
     margin: 0;
-    /* line-height: 0.5em; */
   }
 }
 
@@ -125,28 +153,30 @@
   z-index: 1;
 }
 
-.select-image-block p {
+.select-image-block h6 {
   margin-bottom: 0.5em !important;
 }
 
 .select-geoIcon {
   display: flex;
   text-align: center;
-  margin-bottom: 0.5em;
+  margin-bottom: 0.25em;
+  margin-right: 5px;
 }
 
 .select-geoIcon img {
   height: 40px;
-  margin-bottom: 1em;
 }
 
 .select-geoIcon_current {
-  border: #000 solid 2px;
+  border: #76727c solid 2px;
   margin-bottom: -4px;
+  margin-right: 5px;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.52);
 }
 
 .select-geoIcon figure {
-  padding: 0.5em 0.35em 0 0.35em;
+  padding: 0.5em 0.25em;
   margin-bottom: 0 !important;
   position: relative;
   display: inline-block;

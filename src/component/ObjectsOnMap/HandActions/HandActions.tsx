@@ -1,8 +1,26 @@
 import React from "react";
 import { typeObject } from "../../../testData/typeObject";
-import { v4 as uuidv4 } from "uuid";
+// import { v4 as uuidv4 } from "uuid";
 
-const HandActions = (props) => {
+interface HandActionsProps {
+  handleSelectMark(iconUserMarker: string): void;
+  iconUserMarker: string;
+  dataSelectObject: {
+    id: number;
+    name: string;
+    address: string;
+    comments: string;
+    linkSource: string;
+  };
+  showDataSelectObject: boolean;
+  changeInputHandler(event: React.ChangeEvent): void;
+  onSaveData(): void;
+  onClickCloseButton(): void;
+  onActiveEditData(): void;
+  activeEditData: boolean;
+}
+
+const HandActions: React.FC<HandActionsProps> = (props) => {
   const geoIconsFilter = typeObject.filter((icon) => icon.icon_name);
   const geoIcons = geoIconsFilter.map((icon) => {
     const selectMarkerStyle =
@@ -16,7 +34,7 @@ const HandActions = (props) => {
           onClick={() => {
             props.handleSelectMark(icon.icon_name);
           }}
-          key={uuidv4()}
+          key={icon.icon_name}
         >
           <img src={`/img/iconGEO/${icon.icon_name}`} alt={icon.title} />
           <figcaption>{icon.shortTitle || icon.title}</figcaption>
@@ -34,29 +52,27 @@ const HandActions = (props) => {
   });
   const tagsTypeObject = typeObject.map((tag) => {
     return (
-      <tag className="tagTypeObject" key={tag.type}>{`#${
+      <span className="tag_type_object" key={tag.type}>{`#${
         tag.shortTitle || tag.title
-      } `}</tag>
+      } `}</span>
     );
   });
 
   return (
     <div className="hand_actions">
-      <div className="select-image-block">
-        <p>
-          <b>Выбери персонажа чтобы поставить на карту</b>
-        </p>
+      <div className="select-image-block item_hand_actions">
+        <h6>Выбери персонажа чтобы поставить на карту</h6>
         <div className="select-geoIcon">{geoIcons}</div>
       </div>
       {props.showDataSelectObject && (
-        <div className="aboutSelectObject">
+        <div className="about_select_object item_hand_actions">
           <h6>Сведения</h6>
           <span
             className="close-button"
             onClick={props.onClickCloseButton}
           ></span>
           <b>id: </b>
-          <span>{props.selectObject.id}</span>
+          <span>{props.dataSelectObject.id}</span>
 
           {props.activeEditData ? (
             <>
@@ -65,7 +81,7 @@ const HandActions = (props) => {
                 type="text"
                 className="form-control"
                 id="name"
-                value={props.selectObject.name}
+                value={props.dataSelectObject.name}
                 name="name"
                 onChange={props.changeInputHandler}
               />
@@ -74,16 +90,15 @@ const HandActions = (props) => {
                 type="text"
                 className="form-control"
                 id="address"
-                value={props.selectObject.address}
+                value={props.dataSelectObject.address}
                 name="address"
                 onChange={props.changeInputHandler}
               />
               <textarea
                 placeholder="заслуги"
-                type="text"
                 className="form-control"
                 id="comments"
-                value={props.selectObject.comments}
+                value={props.dataSelectObject.comments}
                 name="comments"
                 onChange={props.changeInputHandler}
               />
@@ -91,19 +106,19 @@ const HandActions = (props) => {
                 placeholder="ссылка"
                 type="text"
                 className="form-control"
-                id="linkSourse"
-                value={props.selectObject.linkSourse}
-                name="linkSourse"
+                id="linkSource"
+                value={props.dataSelectObject.linkSource}
+                name="linkSource"
                 onChange={props.changeInputHandler}
               />
               {tagsTypeObject}
             </>
           ) : (
             <>
-              <label>{props.selectObject.name}</label>
-              <label>{props.selectObject.address.city}</label>
-              <label>{props.selectObject.comments}</label>
-              <label>{props.selectObject.linkSourse}</label>
+              <div>{props.dataSelectObject.name}</div>
+              <div>{props.dataSelectObject.address}</div>
+              <div>{props.dataSelectObject.comments}</div>
+              <div>{props.dataSelectObject.linkSource}</div>
             </>
           )}
 
@@ -117,11 +132,11 @@ const HandActions = (props) => {
           </div>
         </div>
       )}
-      <div className="show-map-type-objects">
-        <p>
-          <b>Фильтр отображаемых объектов:</b>
-        </p>
-        <div>{renderTypes} </div>
+      <div className="show_map_type_objects item_hand_actions">
+        <h6>Фильтр отображаемых объектов:</h6>
+        <div>
+          <div className="show_map_type_objects-list">{renderTypes} </div>
+        </div>
       </div>
     </div>
   );
